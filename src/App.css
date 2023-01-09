@@ -3,7 +3,7 @@ input{
 }
 
 button{
-  width: 7%;
+  width: 4.5vw;
   height: 100%;
   border:1px solid lightblue;
   border-radius:5px;
@@ -20,7 +20,7 @@ p {
 .App {
   text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -52,12 +52,13 @@ p {
 }
 
 #messageInput{
-  width:92%;
+  width:45vw;
 }
 
 #past-messages{
   height: calc(100% - 20px - 1.25vmin);
   display: flex;
-  flex-direction:column;
-  justify-content: flex-end;
+  flex-direction:column-reverse;
+  justify-content: flex-start;
+  overflow-y:auto;
 }
