@@ -1,9 +1,9 @@
 const Message = (props) => {
 
-  const messageClass = props.user === 'me' ? "my-message" : "not-my-message"
+  const messageClass = props.sender === 'me' ? "my-message" : "not-my-message"
 
   return ( 
-    <p className={messageClass}> {props.text}</p>
+    <p className={messageClass}> {props.content}</p>
   );
 }
 
