@@ -1,4 +1,3 @@
-// import { io } from 'socket.io-client';
 
 import { useState, useEffect } from 'react';
 
@@ -29,17 +28,6 @@ const MessageBox = (props) => {
   useEffect(() => {
     setMessages(props.dialogue.messages)
   }, [props.dialogue.messages])
-  
-
-  // const socket = io("ws://localhost:3001");
-
-  // send a message to the server
-  // socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) });
-
-  // receive a message from the server
-  // socket.on("hello from server", (...args) => {
-  // ...
-  // });
 
   return (
     <div id="message-box">

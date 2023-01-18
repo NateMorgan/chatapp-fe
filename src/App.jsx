@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
+import { io } from 'socket.io-client';
+
 import * as authService from './services/authService.js';
 
 import Header from './components/Header/Header';
@@ -51,6 +53,16 @@ function App() {
   const handleSignupOrLogin = () => {
     setUser(authService.getUser());
   };
+
+  const socket = io("ws://localhost:3003");
+
+  // send a message to the server
+  socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) });
+
+  // receive a message from the server
+  socket.on("hello from server", (...args) => {
+    console.log("Received a message from the server!")
+  });
 
   useEffect(() => {
     const fetchDialogues = async () => {
