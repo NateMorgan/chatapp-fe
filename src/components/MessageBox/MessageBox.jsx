@@ -4,14 +4,22 @@ import { useState } from 'react';
 
 import Message from '../Message/Message';
 
+import * as dialogueService from "../../services/dialogueService.js"
+
 const MessageBox = (props) => {
   const [messages, setMessages] = useState(props.dialogue.messages);
 
   const [formData, setFormData] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setMessages([{ sender: 'me', text: formData }, ...messages]);
+    setMessages([{ sender: 'me', content: formData }, ...messages]);
+    console.log(formData)
+    try {
+      await dialogueService.sendMessage(props.dialogue._id,formData)
+    } catch (err) {
+      console.log(err)
+    }
     setFormData('');
   };
 
@@ -37,6 +45,7 @@ const MessageBox = (props) => {
             key={message._id}
             sender={message.sender}
             content={message.content}
+            user={props.user}
           />
         ))}
       </div>
