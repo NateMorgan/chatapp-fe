@@ -1,6 +1,6 @@
 // import { io } from 'socket.io-client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Message from '../Message/Message';
 
@@ -13,8 +13,7 @@ const MessageBox = (props) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setMessages([{ sender: 'me', content: formData }, ...messages]);
-    console.log(formData)
+    setMessages([{ sender: props.user.profile, content: formData }, ...messages]);
     try {
       await dialogueService.sendMessage(props.dialogue._id,formData)
     } catch (err) {
@@ -26,6 +25,11 @@ const MessageBox = (props) => {
   const handleChange = (e) => {
     setFormData(e.target.value);
   };
+
+  useEffect(() => {
+    setMessages(props.dialogue.messages)
+  }, [props.dialogue.messages])
+  
 
   // const socket = io("ws://localhost:3001");
 
@@ -40,7 +44,7 @@ const MessageBox = (props) => {
   return (
     <div id="message-box">
       <div id="past-messages">
-        {props.dialogue.messages.map((message) => (
+        {messages.map((message) => (
           <Message
             key={message._id}
             sender={message.sender}
